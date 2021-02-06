@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv  = require('dotenv')
 //Route files
 const bootcamp = require('./routes/bootcamps')
+const course = require('./routes/courses')
 const morgan = require('morgan')
 const colors = require('colors')
 const connectDB = require('./config/db')
@@ -25,6 +26,7 @@ if(process.env.NODE_ENV === 'development'){
 
 //Mount the routers
 app.use('/api/v1/bootcamps', bootcamp)
+app.use('/api/v1/courses', course)
 
 //Register the custom error handler
 app.use(errorHandler)
