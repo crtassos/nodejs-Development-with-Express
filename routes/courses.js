@@ -2,7 +2,9 @@ const express = require('express')
 const {
     getCourses,
     getCourse,
-    addCourse
+    addCourse,
+    updateCourse,
+    deleteCourse
     } = require('../controllers/courses')
 
 
@@ -15,6 +17,8 @@ router
 router
     .route('/:id')
     .get(getCourse)
+    .put(updateCourse)
+    .delete(deleteCourse)
     
 
 
