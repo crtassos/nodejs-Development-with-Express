@@ -21,6 +21,7 @@ const advancedResults = (model, populate) => async (req,res,next) =>{
 
     // Finding resource
     query =  model.find(JSON.parse(queryStr))
+    console.log('tassos query', query)
 
     // select fields
     if(req.query.select){
