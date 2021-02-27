@@ -9,7 +9,7 @@ const asyncHandler = require('../middleware/async')
 //@access Public
 exports.getCourses = asyncHandler(async (req,res,next)=>{
     if(req.params.bootcampId) {
-        const courses = Course.find({ bootcamp: req.params.bootcampId })
+        const courses = await Course.find({ bootcamp: req.params.bootcampId })
 
         return res.status(200).json({
             success: true,
@@ -31,7 +31,7 @@ exports.getCourse = asyncHandler(async (req,res,next)=>{
     })
 
     if(!course){
-        return next(new ErrorResponse(`Course with id ${req.params.id} doesn't exist`),400)
+        return next(new ErrorResponse(`Course with id ${req.params.id} doesn't exist`,400))
     }
 
 
@@ -54,7 +54,7 @@ exports.addCourse = asyncHandler(async (req,res,next)=>{
 
     if(!bootcamp){
         return next(
-            new ErrorResponse(`Course with id ${req.params.id} doesn't exist`),400)
+            new ErrorResponse(`Course with id ${req.params.id} doesn't exist`,400))
     }
 
     // Make sure the user is bootcamp owner
@@ -80,8 +80,7 @@ exports.updateCourse = asyncHandler(async (req,res,next)=>{
 
     if(!course){
         return next(
-            new ErrorResponse(`Course with id ${req.params.id} doesn't exist`),
-            404)
+            new ErrorResponse(`Course with id ${req.params.id} doesn't exist`,404))
     }
 
     // Make sure the user is course owner
@@ -110,8 +109,7 @@ exports.deleteCourse = asyncHandler(async (req,res,next)=>{
 
     if(!course){
         return next(
-            new ErrorResponse(`Course with id ${req.params.id} doesn't exist`),
-            404)
+            new ErrorResponse(`Course with id ${req.params.id} doesn't exist`,404))
     }
 
     // Make sure the user is bootcamp owner

@@ -14,14 +14,11 @@ const advancedResults = (model, populate) => async (req,res,next) =>{
     // create query string
     let queryStr = JSON.stringify(reqQuery)
 
-    //console.log('queryStr = ',queryStr)
-
     // Create operators ($gt, $gte, etc)
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g,match => `$${match}`)
 
     // Finding resource
     query =  model.find(JSON.parse(queryStr))
-    console.log('tassos query', query)
 
     // select fields
     if(req.query.select){
