@@ -16,6 +16,9 @@ const cookieParser = require('cookie-parser')
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet')
 const xssClean = require('xss-clean')
+const rateLimit = require("express-rate-limit")
+const hpp = require('hpp')
+const cors = require('cors')
 
 //Load env vars
 dotenv.config({path: './config/config.env'})
@@ -47,6 +50,19 @@ app.use(helmet())
 
 // Prevent XSS attacks
 app.use(xssClean())
+
+// Enable Cross-origin resource sharing (CORS)
+app.use(cors())
+
+// limit repeated requests
+const rateLimiter = rateLimit({
+    windowMs: 10 * 60 *1000, //10mins
+    max:1
+})
+app.use(rateLimiter)
+
+// http parameter pollution
+app.use(hpp())
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')))
