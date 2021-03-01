@@ -57,7 +57,7 @@ app.use(cors())
 // limit repeated requests
 const rateLimiter = rateLimit({
     windowMs: 10 * 60 *1000, //10mins
-    max:1
+    max:10
 })
 app.use(rateLimiter)
 
